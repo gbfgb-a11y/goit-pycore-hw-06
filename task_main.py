@@ -47,13 +47,21 @@ class Record:
         
 
     def edit_phone(self, old_phone, new_phone):
-        for i, a in enumerate(self.phones):
-            if a.value == old_phone:
-                self.remove_phone(old_phone)
-        self.add_phone(new_phone)
-
+        if isinstance(old_phone, Phone):
+            old_phonephone = old_phone.value
+        if isinstance(new_phone, Phone):
+            new_phonephone = new_phone.value
+        if new_phone:
+            for i, a in enumerate(self.phones):
+                if a.value == old_phone:
+                    self.remove_phone(old_phone)
+            self.add_phone(new_phone)
+        else:
+            raise ValueError('Phone does not anwer requirements.')
 
     def find_phone(self, phone):
+        if isinstance(phone, Phone):
+            phone = phone.value
         for i in self.phones:
             if i.value == phone:
                 return i
