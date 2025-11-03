@@ -51,11 +51,11 @@ class Record:
             old_phonephone = old_phone.value
         if isinstance(new_phone, Phone):
             new_phonephone = new_phone.value
-        if new_phone:
+        if new_phone and old_phone:
             for i, a in enumerate(self.phones):
                 if a.value == old_phone:
                     self.remove_phone(old_phone)
-            self.add_phone(new_phone)
+                    self.add_phone(new_phone)
         else:
             raise ValueError('Phone does not anwer requirements.')
 
