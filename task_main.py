@@ -47,18 +47,26 @@ class Record:
         
 
     def edit_phone(self, old_phone, new_phone):
+        numbers = ['0','1','2','3','4','5','6','7','8','9']
+        validcount = 0
         if isinstance(old_phone, Phone):
-            old_phonephone = old_phone.value
+            pass
         if isinstance(new_phone, Phone):
-            new_phonephone = new_phone.value
+            pass
         if new_phone and old_phone:
             for i, a in enumerate(self.phones):
                 if a.value == old_phone:
-                    self.remove_phone(old_phone)
-                    self.add_phone(new_phone)
+                    if len(new_phone) == 10:
+                        for i in new_phone:
+                            if i in numbers:
+                                validcount+=1
+                            else:
+                                pass
+                        if validcount == 10:
+                            self.add_phone(new_phone)
+                            self.remove_phone(old_phone)
         else:
             raise ValueError('Phone does not anwer requirements.')
-
     def find_phone(self, phone):
         if isinstance(phone, Phone):
             phone = phone.value
@@ -94,27 +102,5 @@ john_record = Record("John")
 john_record.add_phone("1234567890")
 john_record.add_phone("5555555555")
 
-# Додавання запису John до адресної книги
-book.add_record(john_record)
-
-# Створення та додавання нового запису для Jane
-jane_record = Record("Jane")
-jane_record.add_phone("9876543210")
-book.add_record(jane_record)
-
-# Виведення всіх записів у книзі
-for name, record in book.data.items():
-        print(record)
-
-# Знаходження та редагування телефону для John
-john = book.find("John")
-john.edit_phone("1234567890", "1112223333")
-
-print(john)  # Виведення: Contact name: John, phones: 1112223333; 5555555555
-
-# Пошук конкретного телефону у записі John
-found_phone = john.find_phone("5555555555")
-print(f"{john.name}: {found_phone}")  # Виведення: 5555555555
-
-# Видалення запису Jane
-book.delete("Jane")
+john_record.edit_phone('1234567890', '0000000003')
+print(john_record)
