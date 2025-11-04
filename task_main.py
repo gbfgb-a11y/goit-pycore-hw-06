@@ -7,19 +7,6 @@ class Field:
 
     def __str__(self):
         return str(self.value)
-def validator(func):
-    def inner(nothing , something):
-        numbers = ['0','1','2','3','4','5','6','7','8','9']
-        valc = 0
-        if len(something) == 10:
-            for i in something:
-                if i in numbers:
-                    pass
-                else:
-                    valc+=1
-            if valc == 0:
-                return something
-    return inner
 
 class Name(Field):
     pass
@@ -108,4 +95,5 @@ john_record.add_phone("5555555555")
 john_record.edit_phone('1234567890', '098765431')
 print(Phone('123'))
 print(john_record)
+
 
